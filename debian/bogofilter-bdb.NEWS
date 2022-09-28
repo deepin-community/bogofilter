@@ -1,0 +1,174 @@
+bogofilter (1.2.4+dfsg1-3) unstable; urgency=low
+
+   If this is a new installation, or if you are upgrading from a
+    version prior to 0.93.0-1, you should have no problems.
+    If you are using the BDB backend with transactions enabled (they're
+    disabled by default), you must manually clean-up your transaction logs
+    before it will function again.
+   To do so, first make sure you have the db4.X-util package
+    installed, the precise version depending on the Debian release
+    you upgrade from:
+        * squeeze (bogofilter 1.2.2-2+squeeze1): db4.8-util
+        * wheezy (bogofilter 1.2.2+dfsg1-2): db5.1-util
+        * jessie/unstable (bogofilter 1.2.4+dfsg1-3): db5.3-util
+   Then (substitute 5.3 below for the version of your release):
+        1. Stop invocation of bogofilter
+        2. db5.3_recover -h ~/.bogofilter
+        3. rm ~/.bogofilter/lockfi*
+        4. cd ~/.bogofilter && rm $(db5.3_archive -h .)
+        5. Resume invocation of bogofilter
+   Repeat this upgrade procedure for each relevant bogofilter
+    wordlist database, substituting the directory name for
+    "~/.bogofilter".
+   Alternately, if you don't want to upgrade your database, you
+    may move or delete it and rebuild your wordlist from scratch.
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sat, 13 Apr 2014 21:04:24 +0200
+
+bogofilter (1.2.2-3) unstable; urgency=low
+
+   If this is a new installation, or if you are upgrading from a
+    version prior to 0.93.0-1, you should have no problems.
+    If you are using the BDB backend with transactions enabled (they're
+    disabled by default), you must manually clean-up your transaction logs
+    before it will function again.
+   To do so, first make sure you have the db4.X-util package
+    installed, the precise version depending on the Debian release
+    you upgrade from:
+        * lenny (bogofilter 1.1.7-1): db4.6-util
+        * squeeze (bogofilter 1.2.2-2): db4.8-util
+        * unstable (bogofilter 1.2.2-2): db4.8-util
+   Then (substitute 4.8 below for the version of your release):
+        1. Stop invocation of bogofilter
+        2. db4.8_recover -h ~/.bogofilter
+        3. rm ~/.bogofilter/lockfi*
+        4. cd ~/.bogofilter && rm $(db4.8_archive -h .)
+        5. Resume invocation of bogofilter
+   Repeat this upgrade procedure for each relevant bogofilter
+    wordlist database, substituting the directory name for
+    "~/.bogofilter".
+   Alternately, if you don't want to upgrade your database, you
+    may move or delete it and rebuild your wordlist from scratch.
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sat, 09 Apr 2011 21:04:24 +0200
+
+bogofilter (1.2.1-2) unstable; urgency=low
+
+   If this is a new installation, or if you are upgrading from a
+    version prior to 0.93.0-1, you should have no problems.
+    If you are using the BDB backend with transactions enabled (they're
+    disabled by default), you must manually clean-up your transaction logs
+    before it will function again.
+   To do so, first make sure you have the db4.X-util package
+    installed, the precise version depending on the Debian release
+    you upgrade from:
+        * etch (bogofilter 1.1.1-3): db4.4-util
+        * lenny (bogofilter 1.1.7-1): db4.6-util
+        * testing (bogofilter 1.2.0-1): db4.6-util
+        * unstable (bogofilter 1.2.1-1): db4.7-util
+   Then (substitute 4.6 below for the version of your release):
+        1. Stop invocation of bogofilter
+        2. db4.6_recover -h ~/.bogofilter
+        3. rm ~/.bogofilter/lockfi*
+        4. cd ~/.bogofilter && rm $(db4.6_archive -h .)
+        5. Resume invocation of bogofilter
+   Repeat this upgrade procedure for each relevant bogofilter
+    wordlist database, substituting the directory name for
+    "~/.bogofilter".
+   Alternately, if you don't want to upgrade your database, you
+    may move or delete it and rebuild your wordlist from scratch.
+
+ -- Serafeim Zanikolas <serzan@hellug.gr>  Sun, 14 Feb 2010 11:48:55 +0100
+
+bogofilter (1.2.0-2) unstable; urgency=low
+
+   If you are using the BDB backend with transactions enabled,
+    you must manually upgrade each of your wordlist databases
+    before it will function again.
+   To do so, follow the instructions below, but using the utilities from the
+    db4.6-util package.
+
+ -- Serafeim Zanikolas <serzan@hellug.gr>  Wed, 06 May 2009 22:55:15 +0200
+
+bogofilter (1.1.5-3) unstable; urgency=low
+
+   If this is a new installation, or if you are upgrading from a
+    version prior to 0.93.0-1, you should have no problems.
+    If you are using the BDB backend with transactions enabled,
+    you must manually upgrade each of your wordlist databases
+    before it will function again.
+   To do so, first make sure you have the db4.5-util package
+    installed, then
+    1. Stop invocation of bogofilter
+    2. db4.5_recover -h ~/.bogofilter
+    3. rm ~/.bogofilter/lockfi*
+    4. cd ~/.bogofilter && rm $(db4.5_archive -h .)
+    5. Resume invocation of bogofilter
+   Repeat this upgrade procedure for each relevant bogofilter
+    wordlist database, substituting the directory name for
+    "~/.bogofilter".
+   Alternately, if you don't want to upgrade your database, you
+    may move or delete it and rebuild your wordlist from scratch.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 29 Jul 2007 07:17:21 -0400
+
+bogofilter (1.0.1-2) unstable; urgency=low
+
+   If this is a new installation, or if you are upgrading from a
+    version prior to 0.93.0-1, you should have no problems.
+    If you are using the BDB backend with transactions enabled,
+    you must manually upgrade each of your wordlist databases
+    before it will function again.
+   To do so, first make sure you have the db4.3-util package
+    installed, then
+    1. Stop invocation of bogofilter
+    2. db4.3_recover -h ~/.bogofilter
+    3. rm ~/.bogofilter/lockfi*
+    4. cd ~/.bogofilter && rm $(db4.3_archive -h .)
+    5. Resume invocation of bogofilter
+   Repeat this upgrade procedure for each relevant bogofilter
+    wordlist database, substituting the directory name for
+    "~/.bogofilter".
+   Alternately, if you don't want to upgrade your database, you
+    may move or delete it and rebuild your wordlist from scratch.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 14 Jan 2006 14:47:17 -0500
+
+bogofilter (0.93.1-2) unstable; urgency=medium
+
+   If this is a new installation, or if you are upgrading from a
+    version prior to 0.93.0-1, you should have no problems.  If,
+    on the other hand, you are unfortunate enough to be upgrading
+    from 0.93.0-1 or 0.93.0-2, you must manually upgrade each of
+    your wordlist databases before it will function again.
+   To do so, first make sure you have the db4.2-util package
+    installed, then
+    1. Stop invocation of bogofilter
+    2. db4.2_recover -h ~/.bogofilter
+    3. rm ~/.bogofilter/lockfi*
+    4. cd ~/.bogofilter && rm $(db4.2_archive -h .)
+    5. Resume invocation of bogofilter
+   Repeat this upgrade procedure for each relevant bogofilter
+    wordlist database, substituting the directory name for
+    "~/.bogofilter".
+   Alternately, if you don't want to upgrade your database, you
+    may move or delete it and rebuild your wordlist from scratch.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 27 Nov 2004 16:29:00 -0500
+
+bogofilter (0.93.0-1) unstable; urgency=low
+
+   For more detailed information, read
+    /usr/share/doc/bogofilter/RELEASE.NOTES-0.93 .
+   bogofilter's defaults have changed.  All users should be made aware
+    that depending on their configurations, the words in the header added
+    to messages by bogofilter in passthrough mode may abruptly change from
+    "Yes" and "No" to "Spam", "Ham", and "Unsure"; and this may render
+    useless any filtering based on these headers.
+   bogofilter has switched to use the Berkeley DB Transactional Data
+    Store.  bogofilter will read databases created by previous versions,
+    though rebuilding the database is recommended to take advantage of all
+    features.  Currently transaction log files need to be archived or
+    deleted manually.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  6 Nov 2004 23:05:11 -0500

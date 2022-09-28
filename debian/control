@@ -1,0 +1,105 @@
+Source: bogofilter
+Section: mail
+Priority: optional
+Maintainer: Adrian Bunk <bunk@debian.org>
+Build-Depends: debhelper (>= 11),
+               dh-exec,
+               flex,
+               libdb-dev (>= 4.6.19),
+               libgsl-dev,
+               libsqlite3-dev,
+               libtokyocabinet-dev,
+Standards-Version: 3.9.8
+Homepage: http://bogofilter.sourceforge.net/
+
+Package: bogofilter
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: bogofilter-bdb | bogofilter-db, bogofilter-common, ${misc:Depends}
+Description: fast Bayesian spam filter (meta package)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+
+Package: bogofilter-bdb
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: bogofilter-common (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Suggests: db5.3-util
+Provides: bogofilter-db
+Replaces: bogofilter (<< 0.94.14-1)
+Description: fast Bayesian spam filter (Berkeley DB)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the bdb database backend.
+
+Package: bogofilter-sqlite
+Priority: optional
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: bogofilter-common (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Provides: bogofilter-db
+Description: fast Bayesian spam filter (sqlite)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the sqlite database backend.
+
+Package: bogofilter-tokyocabinet
+Priority: optional
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: bogofilter-common (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Provides: bogofilter-db
+Description: fast Bayesian spam filter (tokyocabinet)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the tokyocabinet backend.
+
+Package: bogofilter-common
+Architecture: any
+Depends: ${misc:Depends}
+Suggests: doc-base
+Replaces: bogofilter (<< 0.94.14-1)
+Description: fast Bayesian spam filter (common files)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides files that are common for all database backends.

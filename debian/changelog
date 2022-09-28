@@ -1,0 +1,1829 @@
+bogofilter (1.2.5-1) unstable; urgency=high
+
+  * New upstream release. (Closes: #980328)
+    - Security announcements have been relicensed under
+       a dual-license, with GPLv3+ as second option.
+    - Fixes crashes with several emails. (Closes: #733622)
+  * Remove the unused build dependency on libtrio-dev.
+    (Closes: #746814)
+
+ -- Adrian Bunk <bunk@debian.org>  Wed, 10 Feb 2021 12:00:56 +0200
+
+bogofilter (1.2.4+dfsg1-13) unstable; urgency=medium
+
+  * Build without autoreconf for now, it causes test problems.
+
+ -- Adrian Bunk <bunk@debian.org>  Fri, 09 Mar 2018 21:30:08 +0200
+
+bogofilter (1.2.4+dfsg1-12) unstable; urgency=medium
+
+  * Add flex build dependency, required with autoreconf
+    that is default with debhelper compat >= 10.
+
+ -- Adrian Bunk <bunk@debian.org>  Thu, 08 Mar 2018 21:52:44 +0200
+
+bogofilter (1.2.4+dfsg1-11) unstable; urgency=medium
+
+  * Also make bogofilter binary-any, to avoid broken dependencies
+    after binNMUs. (Closes: #891911)
+  * Disable tests on hurd, to workaround test hangs.
+  * debhelper compat 11
+  * Priority: extra -> optional
+
+ -- Adrian Bunk <bunk@debian.org>  Thu, 08 Mar 2018 20:38:56 +0200
+
+bogofilter (1.2.4+dfsg1-10) unstable; urgency=medium
+
+  * Make bogofilter-common binary-any, to avoid broken dependencies
+    after binNMUs. (Closes: #871694)
+
+ -- Adrian Bunk <bunk@debian.org>  Sun, 13 Aug 2017 18:39:05 +0300
+
+bogofilter (1.2.4+dfsg1-9) unstable; urgency=medium
+
+  * New maintainer. (Closes: #758455)
+
+ -- Adrian Bunk <bunk@debian.org>  Wed, 25 Jan 2017 16:15:21 +0200
+
+bogofilter (1.2.4+dfsg1-8) unstable; urgency=medium
+
+  * QA upload.
+  * debian/*.preinst:
+      - using dpkg-maintscript-helper. So the file's suffix is .maintscript now.
+        Packages affected:
+          bogofilter and bogofilter-{bdb, sqlite, tokyocabinet}
+        Option used: dir_to_symlink
+        (Closes: #832291) Thanks Andreas Beckmann and James Cowgill.
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Wed, 14 Sep 2016 14:39:50 -0300
+
+bogofilter (1.2.4+dfsg1-7) unstable; urgency=medium
+
+  * QA upload. (Closes: #832291). Thanks Andreas Beckmann.
+  * debian/copyright:
+      - updated my email address.
+  * debian/control:
+      - Pre-Depends: ${misc:Pre-Depends} added  to bogofilter and
+       bogofilter-{bdb, sqlite, tokyocabinet}
+  * debian/bogofilter.links removed:
+      - Not necessary. dh_installdocs is taking care of it.
+  * debian/bogofilter.preinst (created):
+    debian/bogofilter-bdb.preinst:
+    debian/bogofilter-sqlite.preinst:
+    debian/bogofilter-tokyocabinet.preinst:
+      - using the script from https://wiki.debian.org/MissingCopyrightFile
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Thu, 28 Jul 2016 10:47:54 -0300
+
+bogofilter (1.2.4+dfsg1-6) unstable; urgency=low
+
+  * QA upload.
+  * - debian/bogofilter-*.install files created:
+        - to copy and rename the executables and configuration files to the
+          apropriated packages.
+  * debian/*.dirs removed.
+  * debian/*.links:
+      - lines that make the link to '/usr/share/doc/bogofilter-common'
+        removed.
+  * debian/control:
+      - dh-exec added to Build-Depends.
+      - using (= ${source:Version}) for 'binnmuable-any-depends-all'
+  * debian/rules:
+      - extra 'export' from DEB_BUILD_MAINT_OPTIONS removed.
+      - lines that copy and rename executables and configuration files
+        removed.
+      - override_dh_link removed.
+      - using 'dh_installdocs --link-doc'
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Sun, 15 May 2016 10:38:00 -0300
+
+bogofilter (1.2.4+dfsg1-5) unstable; urgency=low
+
+  * QA upload.
+  * Updated the DH level from 7 to 9.
+  * debian/*.links:
+      - link to '/usr/share/doc/bogofilter-common added.
+      - link to '/usr/share/man/man1/bogofilter.1.gz' added.
+  * debian/*.NEWS:
+      - Fixed a spelling error (and and).
+      - Removed all '*' from the beginning of a phrase.
+      - Removed all '-' from the beginning of a phrase.
+  * debian/bogofilter-common.docs:
+      - added:
+          - doc/README.db.
+          - doc/README.sqlite.
+  * debian/bogofilter-bdb.docs removed.
+  * debian/bogofilter-sqlite.docs removed.
+  * debian/control:
+      - Build-Depends:
+          - debhelper >= 9.
+      - Bump Standards-Version to 3.9.8.
+      - Homepage field added.
+      - Vcs* with new format. (https)
+  * debian/copyright:
+      - rewritten to format 1.0.
+      - updated.
+  * debian/patches:
+      - created: (Closes: #815866)
+          - t_bulkmode-nogrep.patch
+          - t_dump_load-nogrep.patch
+          - t_nonascii_replace-nogrep.patch
+  * debian/rules:
+      - rewritten to the new format.
+      - hardening added.
+  * debian/watch:
+      - version 4.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Sun, 08 May 2016 10:17:16 -0300
+
+bogofilter (1.2.4+dfsg1-4) unstable; urgency=low
+
+  * Orphan package.
+  * Update build dependencies for GSL 2, change libgsl0-dev to libgsl-dev.
+    Thanks to Bas Couwenberg <sebastic@debian.org> for the patch
+    (closes: #807187).
+  * Bump Standards-Version to 3.9.6 (no changes).
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sun, 06 Dec 2015 21:32:17 +0000
+
+bogofilter (1.2.4+dfsg1-3) unstable; urgency=medium
+
+  * Update config.guess to build on hurd-i386 (Closes: #729192). Thanks to
+    Samuel Thibault <sthibault@debian.org> for the patch.
+  * Bump Standards-Version to 3.9.5 (no changes).
+  * bdb backend:
+      - build with libdb5.3 and update Suggests to db5.3-util
+      - add NEWS.Debian entry to advise users that have enabled bdb
+        transactions, on upgrade steps
+
+ -- Serafeim Zanikolas <sez@debian.org>  Thu, 08 May 2014 20:31:19 +0100
+
+bogofilter (1.2.4+dfsg1-2) unstable; urgency=low
+
+  * Fix binary-arch-produces-all lintian error, ie. make the debian/rules
+    binary-arch target not build Architecture: all packages.
+  * Make the bogofilter dummy package Architecture: all.
+  * Rename bogofilter-faq-bg.xhtml .html, to not confuse doc-base tools.
+
+ -- Serafeim Zanikolas <sez@debian.org>  Mon, 12 Aug 2013 17:22:54 +0100
+
+bogofilter (1.2.4+dfsg1-1) unstable; urgency=low
+
+  * New Upstream Version
+    * Add bogofilter-SA-2012-01 to the list of non-DFSG licensed files in
+      debian/copyright, that are removed in the repackaged upstream tarball.
+    * Drop debian/patches/sa-2012-01-fix.diff (it's included in new upstream)
+    * Add debian/bogofilter-common.doc-base.bogofilter-faq-bg and
+      register it to debian/bogofilter-common.docs
+  * Bump Standards-Version to 3.9.4
+    * debian/copyright: drop Debian maintainer info
+  * Fix doc-base key for bogofilter-common.doc-base.bogofilter-faq-fr
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sun, 11 Aug 2013 22:15:20 +0100
+
+bogofilter (1.2.2+dfsg1-3) unstable; urgency=low
+
+  * Build with security hardening enabled.
+  * debian/rules: fix the binary target by making the binary-arch target
+    depend on the build target
+  * Update debian/watch to mangle Debian version. closes: #665340.
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sun, 09 Dec 2012 14:01:25 +0100
+
+bogofilter (1.2.2+dfsg1-2) unstable; urgency=high
+
+  * Cherry-pick fix and test for CVE-2012-5468 (aka bogofilter-SA-2012-01)
+    from upstream release 1.2.3. Setting urgency to high. closes: #695139.
+
+ -- Serafeim Zanikolas <sez@debian.org>  Tue, 04 Dec 2012 20:08:50 +0100
+
+bogofilter (1.2.2+dfsg1-1) unstable; urgency=low
+
+  * Rebuild with repackaged source to exclude non-DFSG-free licensed security
+    advisories (this only affects the source package, as the files were not
+    included in the binaries). closes: #645825.
+  * Add debian/README.source to document the above-described modification to
+    the upstream tarball
+  * Add debhelper token to all maintainer scripts
+  * Add debian/rules targets build-arch and build-indep
+  * debian/copyright: list non-DFSG-free files that were removed in repackaged
+    source, and change my email address to the debian one
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sun, 27 Nov 2011 15:28:05 +0100
+
+bogofilter (1.2.2-3) unstable; urgency=low
+
+  * bdb backend:
+      - build with libdb5.1 and update Suggests to db5.1-util
+        closes: #621406.
+      - add NEWS.Debian entry to advise users that have enabled bdb
+        transactions, on upgrade steps
+  * Add Vcs-* fields to debian/control.
+  * Bump Standards-Version to 3.9.2 (no changes).
+  * Drop indefinite article from package short descriptions
+
+ -- Serafeim Zanikolas <sez@debian.org>  Sat, 09 Apr 2011 21:04:24 +0200
+
+bogofilter (1.2.2-2) unstable; urgency=high
+
+  * Add debian/bogofilter-{bdb,sqlite,tokyocabinet}.preinst to remove
+    /usr/share/doc/bogofilter-{bdb,sqlite,tokyocabinet} if they exist and are
+    symlinks, which was the case back in 1.1.7-2. Setting urgency=high.
+    closes: #600489.
+  * Update standards version (no changes).
+
+ -- Serafeim Zanikolas <sez@debian.org>  Mon, 18 Oct 2010 20:51:27 +0200
+
+bogofilter (1.2.2-1) unstable; urgency=low
+
+  * New Upstream Version (fixes CVE-2010-2494, aka bogofilter-SA-2010-01, so
+    drop debian/patches/prevent-memory-corruption-in-base64_decode.diff)
+
+ -- Serafeim Zanikolas <sez@debian.org>  Fri, 09 Jul 2010 19:25:51 +0200
+
+bogofilter (1.2.1-3) unstable; urgency=high
+
+  * Apply patch from Julius Plenz <plenz@cis.fu-berlin.de> to prevent possible
+    heap corruption due to a bug in the base64_decode function (see
+    bogofilter-SA-2010-01). Setting urgency=high. closes: #588090.
+  * Do not hardwire the optimisation level for s390. closes: 582882.
+  * Apply patch from Loïc Minier <lool@dooz.org> to not build
+    bogofilter-tokyocabinet for Ubuntu (and Ubuntu-derived) distributions.
+    closes: #581995.
+  * Force autoconf to use bash. closes: #583311.
+  * debian/bogofilter-common.NEWS: fix debian-news-entry-without-blank-line
+  * debian/control:Maintainer: set to my debian email address.
+  * Bump Standards-Version to 3.9.0 (no changes).
+
+ -- Serafeim Zanikolas <sez@debian.org>  Tue, 06 Jul 2010 00:21:16 +0200
+
+bogofilter (1.2.1-2) unstable; urgency=low
+
+  * Bump Standards-Version to 3.8.4 (no changes).
+  * Convert to dpkg-source 3.0 (quilt) format
+  * Add Depends: ${misc:Depends} for all binary packages
+  * bogofilter-common:
+      - actually install upstream docs, which was not the case since the
+        convertion to dh
+      - register upstream docs with doc-base and add Suggests: doc-base
+      - rename NEWS files so that they're actually picked up by dh
+      - remove entry about dropping qdbm backend from NEWS file (which was
+        not shipped anyway, due to the issue above)
+  * bdb backend:
+      - build with libdb4.8 and update Suggests to db4.8-util
+      - add NEWS.Debian entry to advise users that have enabled bdb
+        transactions, on upgrade steps
+      - correct db-util version in NEWS.Debian for bogofilter-bdb 1.2.0-2
+
+ -- Serafeim Zanikolas <serzan@hellug.gr>  Sun, 14 Feb 2010 11:48:55 +0100
+
+bogofilter (1.2.1-1) unstable; urgency=low
+
+  * New Upstream Version
+  * Bump Standards-Version to 3.8.2 (no changes).
+  * Switch debian/rules to debhelper and improve error handling.
+  * Skip tests when DEB_BUILD_OPTIONS contains nocheck.
+  * Remove revision part of libdb-dev in Build-Depends to ease backporting
+    (fixes build-depends-on-1-revision lintian warning).
+  * Make the dummy package bogofilter depend on bogofilter-common and remove
+    lintian override.
+  * Patch bf_tar to use tar instead of pax given the higher priority of the
+    former, and drop "Suggests: pax". closes: #341973.
+  * Add Build-Depends on quilt.
+  * Copy upstream bogofilter.cf.example to
+    /usr/share/doc/bogofilter/examples/bogofilter.cf.example. closes: #266552
+  * Reduce priority of bogofilter-tokyocabinet to extra, to align with the
+    priority of its dependency libtokyocabinet8. Ditto for bogofilter-sqlite
+    for consistency, as they are both alternative backends. closes: #539561.
+  * Use a single changelog file for all binary packages.
+  * Drop bogofilter-qdbm and announce so in bogofilter-common's NEWS.Debian
+
+ -- Serafeim Zanikolas <serzan@hellug.gr>  Sun, 02 Aug 2009 22:57:31 +0200
+
+bogofilter (1.2.0-3) unstable; urgency=low
+
+  * New maintainer.  closes: #524743.
+  * Maintain a separate Debian changelog for every binary package.
+    closes: #524191.
+  * Allow the system administrator to choose a db backend, other than the
+    default bdb, using update-alternatives.  closes: #315318.
+  * Add symbolic links so that manpages are accessible regardless of the db
+    backend in use.  closes: #437718.
+  * Make executable
+    /usr/share/doc/bogofilter-common/examples/contrib/bogominitrain.pl
+    closes: #281892.
+  * Add lintian override for false lintian error message.
+  * Update binary package descriptions and remove duplicate Section: fields in
+    debian/control.
+
+ -- Serafeim Zanikolas <serzan@hellug.gr>  Wed, 06 May 2009 21:03:34 +0200
+
+bogofilter (1.2.0-2) unstable; urgency=low
+
+  * Bump to Standards-Version 3.8.1.
+  * Set Maintainer to Debian QA Group <packages@qa.debian.org>.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 19 Apr 2009 11:39:26 -0400
+
+bogofilter (1.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 24 Feb 2009 08:59:46 -0500
+
+bogofilter (1.1.7-2) unstable; urgency=low
+
+  * Have bf_compact use the correct bogoutil and bogofilter
+    alternatives.  closes: #501947.
+  * Bump to Standards-Version 3.8.0.
+  * Change suggests from db4.6-util to db4.7-util.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 18 Feb 2009 20:11:21 -0500
+
+bogofilter (1.1.7-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 06 May 2008 11:14:51 -0400
+
+bogofilter (1.1.6-4) unstable; urgency=low
+
+  * Force use of awk (rather than gawk, mawk, or nawk).  closes: #477840.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Apr 2008 11:26:24 -0400
+
+bogofilter (1.1.6-3) unstable; urgency=low
+
+  * Move -common to binary-indep.  closes: #465845.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 28 Feb 2008 11:18:08 -0500
+
+bogofilter (1.1.6-2) unstable; urgency=low
+
+  * Bump to Standards-Version 3.7.3.
+  * Compress NEWS.Debian.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 10 Jan 2008 22:30:18 -0500
+
+bogofilter (1.1.6-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 26 Nov 2007 23:29:00 -0500
+
+bogofilter (1.1.5-4) unstable; urgency=low
+
+  * Add bogofilter-tokyocabinet with datastore support by
+    Pierre Habouzit.  closes: #452452.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 23 Nov 2007 19:31:46 -0500
+
+bogofilter (1.1.5-3) unstable; urgency=low
+
+  * Switch to db4.6 for bogofilter-bdb.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 29 Jul 2007 07:17:21 -0400
+
+bogofilter (1.1.5-2) unstable; urgency=low
+
+  * Switch to db4.5 for bogofilter-bdb.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 13 Apr 2007 14:58:02 -0400
+
+bogofilter (1.1.5-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 14 Jan 2007 20:01:10 -0500
+
+bogofilter (1.1.4-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  1 Jan 2007 16:31:03 -0500
+
+bogofilter (1.1.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  3 Dec 2006 11:34:37 -0500
+
+bogofilter (1.1.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  3 Dec 2006 03:20:23 -0500
+
+bogofilter (1.1.1-6) unstable; urgency=medium
+
+  * Apply patch from Santiago Vila to properly clean up all the
+    substvars files and use modern syntax for tail.
+    closes: #401327.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  2 Dec 2006 11:55:36 -0500
+
+bogofilter (1.1.1-5) unstable; urgency=medium
+
+  * Reenable qdbm, now that the alpha problem has a workaround.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  3 Nov 2006 11:00:04 -0500
+
+bogofilter (1.1.1-4) unstable; urgency=low
+
+  * Disable qdbm again.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 22 Oct 2006 04:43:04 -0400
+
+bogofilter (1.1.1-3) unstable; urgency=low
+
+  * Reenable qdbm.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 17 Sep 2006 03:17:05 -0400
+
+bogofilter (1.1.1-2) unstable; urgency=low
+
+  * Remove the qdbm build-dep while the qdbm build is disabled.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  4 Sep 2006 00:32:18 -0400
+
+bogofilter (1.1.1-1) unstable; urgency=medium
+
+  * New upstream stable release.
+  * Disable qdbm build due to qdbm breakage.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  1 Sep 2006 15:36:58 -0400
+
+bogofilter (1.0.3-1) unstable; urgency=low
+
+  * New upstream current release.
+  * Bump Standards-Version to 3.7.2.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 11 Jul 2006 09:53:46 -0400
+
+bogofilter (1.0.2-3) unstable; urgency=low
+
+  * Strip .comment section from binaries.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  3 Apr 2006 20:23:43 -0400
+
+bogofilter (1.0.2-2) unstable; urgency=medium
+
+  * Change Suggests to db4.4-util.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  6 Mar 2006 09:40:13 -0500
+
+bogofilter (1.0.2-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  3 Mar 2006 20:30:30 -0500
+
+bogofilter (1.0.1-2) unstable; urgency=low
+
+  * Switch to db4.4.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 14 Jan 2006 14:47:17 -0500
+
+bogofilter (1.0.1-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  1 Jan 2006 17:42:01 -0500
+
+bogofilter (1.0.0-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 30 Nov 2005 21:43:57 -0500
+
+bogofilter (0.96.6-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 13 Nov 2005 03:40:56 -0500
+
+bogofilter (0.96.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  7 Nov 2005 22:06:19 -0500
+
+bogofilter (0.96.4-2) unstable; urgency=medium
+
+  * Patch from upstream to fix infinite loop when using
+    charset_default=iso-8859-1.  closes: #317524.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  4 Nov 2005 19:29:17 -0500
+
+bogofilter (0.96.4-1) unstable; urgency=high
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  1 Nov 2005 12:52:45 -0500
+
+bogofilter (0.96.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+    - Includes fix from Mariusz Kruk for error in postfix example
+      leading to potential data loss.  closes: #334854, #324646.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 25 Oct 2005 23:48:34 -0400
+
+bogofilter (0.96.2-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 25 Sep 2005 12:07:36 -0400
+
+bogofilter (0.96.1-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  5 Sep 2005 09:39:17 -0400
+
+bogofilter (0.96.0-1) unstable; urgency=low
+
+  * New upstream current release.
+  * TDB support has been dropped upstream, so the -tdb package
+    is dropped as well.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 15 Aug 2005 21:54:11 -0400
+
+bogofilter (0.95.2-1) unstable; urgency=low
+
+  * New upstream current release.
+  * Bump to Standards-Version 3.6.2.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 30 Jun 2005 22:14:01 -0400
+
+bogofilter (0.95.1-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 26 Jun 2005 22:40:33 -0400
+
+bogofilter (0.95.0-2) unstable; urgency=low
+
+  * Make bogofilter-bdb Replace bogofilter (<< 0.94.14-1).  closes: #315316.
+  * Make bogofilter-common Replace bogofilter (<< 0.94.14-1).
+    closes: #315317.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 21 Jun 2005 17:11:23 -0400
+
+bogofilter (0.95.0-1) unstable; urgency=low
+
+  * New upstream current release.
+  * Stop trying to chown in build target.  closes: #315202.
+  * Fix short description of bogofilter-sqlite.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 21 Jun 2005 09:31:38 -0400
+
+bogofilter (0.94.14-2) unstable; urgency=medium
+
+  * Patch tdb code to not attempt unaligned word access.
+  * Disable t.lock3 test for sqlite.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 10 Jun 2005 09:53:14 -0400
+
+bogofilter (0.94.14-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * Ship a binary package for each db backend (Berkeley DB, tdb, qdbm,
+    sqlite).  closes: #309724.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  8 Jun 2005 21:09:29 -0400
+
+bogofilter (0.94.13-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 28 May 2005 16:43:07 -0400
+
+bogofilter (0.94.12-1) unstable; urgency=low
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 15 May 2005 21:57:56 -0400
+
+bogofilter (0.94.11-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 10 May 2005 20:24:47 -0400
+
+bogofilter (0.94.10-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  9 May 2005 11:26:22 -0400
+
+bogofilter (0.94.9-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  6 May 2005 15:25:32 -0400
+
+bogofilter (0.94.8-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  3 May 2005 22:20:40 -0400
+
+bogofilter (0.94.7-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Switch watch file to use the lolando sfdlr.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 30 Apr 2005 12:55:49 -0400
+
+bogofilter (0.94.6-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 26 Apr 2005 20:24:47 -0400
+
+bogofilter (0.94.5-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Drop db4.3-util to Suggests.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 23 Apr 2005 12:33:37 -0400
+
+bogofilter (0.94.4-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  7 Apr 2005 20:49:55 -0400
+
+bogofilter (0.94.3-2) unstable; urgency=low
+
+  * Stop prepending extra #'s to lines in /etc/bogofilter.cf.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  7 Apr 2005 14:14:40 -0400
+
+bogofilter (0.94.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 30 Mar 2005 21:02:16 -0500
+
+bogofilter (0.94.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 25 Mar 2005 00:35:51 -0500
+
+bogofilter (0.94.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 16 Mar 2005 21:31:42 -0500
+
+bogofilter (0.94.0-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  5 Mar 2005 20:55:45 -0500
+
+bogofilter (0.93.5-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 22 Jan 2005 21:21:28 -0500
+
+bogofilter (0.93.4-2) unstable; urgency=low
+
+  * Fix 'bogofilter -F' crash.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 15 Jan 2005 14:08:36 -0500
+
+bogofilter (0.93.4-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  9 Jan 2005 11:16:40 -0500
+
+bogofilter (0.93.3.snapshot20050105a-1) unstable; urgency=medium
+
+  * New unofficial Matthias snapshot.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  5 Jan 2005 11:26:31 -0500
+
+bogofilter (0.93.3.1-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 26 Dec 2004 23:06:23 -0500
+
+bogofilter (0.93.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 24 Dec 2004 23:14:35 -0500
+
+bogofilter (0.93.2.cvs+1220-1) unstable; urgency=medium
+
+  * New upstream CVS snapshot.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 20 Dec 2004 13:30:23 -0500
+
+bogofilter (0.93.2.cvs+1213-1) unstable; urgency=medium
+
+  * New upstream CVS snapshot.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 15 Dec 2004 17:51:31 -0500
+
+bogofilter (0.93.2-2) unstable; urgency=medium
+
+  * Change bf_* scripts to call db4.3_* instead of
+    db_*.
+  * Raise Suggests on db4.3-util to Recommends.
+  * Add Suggests on pax (for bf_tar).
+
+ -- Clint Adams <schizo@debian.org>  Mon,  6 Dec 2004 22:33:32 -0500
+
+bogofilter (0.93.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  3 Dec 2004 20:51:07 -0500
+
+bogofilter (0.93.1-2) unstable; urgency=medium
+
+  * Add Suggests for db4.3-util.  closes: #282779.
+  * Build-dep on libdb4.3-dev.
+  * Add NEWS.Debian entry to advise on upgrade steps
+    for anyone coming from 0.93.0-1 or 0.93.1-1.
+    (Such users will find that bogofilter will break
+     completely until they intervene).
+
+ -- Clint Adams <schizo@debian.org>  Sat, 27 Nov 2004 16:29:00 -0500
+
+bogofilter (0.93.1-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 11 Nov 2004 09:55:08 -0500
+
+bogofilter (0.93.0-1) unstable; urgency=low
+
+  * New upstream current release (the release of significant
+    changes).
+  * Add NEWS.Debian to advise people not to downgrade, and to
+    be aware of changes in defaults.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  6 Nov 2004 23:05:11 -0500
+
+bogofilter (0.92.8-1) unstable; urgency=medium
+
+  * New upstream current release.
+    (This fixes a rfc2047 qp decoding segfault.) closes: #275373.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 19 Oct 2004 21:05:00 -0400
+
+bogofilter (0.92.7-1) unstable; urgency=medium
+
+  * New upstream current release.
+    (This fixes bogotune -D failures.)  closes: #274405.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  2 Oct 2004 11:18:43 -0400
+
+bogofilter (0.92.6-1) unstable; urgency=medium
+
+  * New upstream current release.  Fixes -QQ bugs.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 25 Aug 2004 20:06:33 -0400
+
+bogofilter (0.92.5-1) unstable; urgency=medium
+
+  * New upstream current release.
+    - adds "-QQ" option to bogofilter to display extended parameter
+      list.  closes: #265667, #265706.
+    - improves documentation and resiliency of '-y'.  closes: #264502.
+
+
+ -- Clint Adams <schizo@debian.org>  Fri, 20 Aug 2004 10:46:18 -0400
+
+bogofilter (0.92.4-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 29 Jul 2004 11:45:17 -0400
+
+bogofilter (0.92.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Change watch file to point to ftp2.sf.net instead of
+    prdownloads.sourceforge.net.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 28 Jul 2004 09:32:34 -0400
+
+bogofilter (0.92.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 15 Jul 2004 00:03:58 -0400
+
+bogofilter (0.92.1-2) unstable; urgency=low
+
+  * Add debian/watch file for dehs.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  9 Jul 2004 08:38:48 -0400
+
+bogofilter (0.92.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  1 Jul 2004 22:03:09 -0400
+
+bogofilter (0.92.0-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 27 Jun 2004 09:22:31 -0400
+
+bogofilter (0.91.4-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 20 Jun 2004 17:32:38 -0400
+
+bogofilter (0.91.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 16 Jun 2004 09:24:52 -0400
+
+bogofilter (0.91.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 11 Jun 2004 16:14:50 -0400
+
+bogofilter (0.91.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  4 Jun 2004 10:59:20 -0400
+
+bogofilter (0.91.0-4) unstable; urgency=low
+
+  * Additional wordlist and datastore patches.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  2 Jun 2004 10:49:07 -0400
+
+bogofilter (0.91.0-3) unstable; urgency=low
+
+  * Apply other patches related to tilde expansion cleanup.
+  * Convert contrib/scramble and contrib/trainbogo.sh from bash
+    scripts to POSIX sh scripts.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 30 May 2004 17:32:21 -0400
+
+bogofilter (0.91.0-2) unstable; urgency=medium
+
+  * Apply patch to unbreak tilde expansion.  closes: #251117.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 28 May 2004 09:52:56 -0400
+
+bogofilter (0.91.0-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 22 May 2004 17:17:18 -0400
+
+bogofilter (0.90.0-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  9 May 2004 22:29:25 -0400
+
+bogofilter (0.17.5-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  1 Apr 2004 22:33:17 -0500
+
+bogofilter (0.17.4-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 22 Mar 2004 09:38:48 -0500
+
+bogofilter (0.17.3-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 18 Mar 2004 09:14:45 -0500
+
+bogofilter (0.17.2-4) unstable; urgency=low
+
+  * Extend bogotune -f to override sanity checks on ham-spam ratio.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  3 Mar 2004 06:29:39 -0500
+
+bogofilter (0.17.2-3) unstable; urgency=low
+
+  * Extend bogotune -f to override sanity checks on provided
+    corpora.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  3 Mar 2004 06:21:47 -0500
+
+bogofilter (0.17.2-2) unstable; urgency=low
+
+  * Apply (on a temporary trial basis) Jason A. Smith's bogotune
+    -f patch (allows override of sanity checks; currently proscribed
+    by bogofilter upstream).
+
+ -- Clint Adams <schizo@debian.org>  Wed,  3 Mar 2004 05:35:04 -0500
+
+bogofilter (0.17.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 22 Feb 2004 15:07:17 -0500
+
+bogofilter (0.17.1-2) unstable; urgency=low
+
+  * Fix -n/-s thinko in bogofilter(1), thanks to Stephane
+    Bortzmeyer.  closes: #233838.
+  * Add missing slash to mailfilter example, thanks to Kai Hendry.
+    closes: #232830.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 20 Feb 2004 09:45:47 -0500
+
+bogofilter (0.17.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 10 Feb 2004 11:17:56 -0500
+
+bogofilter (0.17.0-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  1 Feb 2004 22:01:09 -0500
+
+bogofilter (0.16.4-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 23 Jan 2004 08:21:22 -0500
+
+bogofilter (0.16.3-2) unstable; urgency=medium
+
+  * Don't ship bogogrep stuff from contrib directory.  closes: #228368.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 18 Jan 2004 12:44:47 -0500
+
+bogofilter (0.16.3-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 17 Jan 2004 16:55:57 -0500
+
+bogofilter (0.16.2-2) unstable; urgency=low
+
+  * Install contrib scripts to /usr/share/doc/bogofilter/examples.
+    closes: #227505.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 16 Jan 2004 21:35:25 -0500
+
+bogofilter (0.16.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 16 Jan 2004 19:01:48 -0500
+
+bogofilter (0.16.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  8 Jan 2004 11:01:01 -0500
+
+bogofilter (0.16.0-1) unstable; urgency=low
+
+  * New upstream current release.  If you are using the Graham algorithm,
+    the Robinson geometric-mean algorithm, separate wordlist databases,
+    ignorelists, or any related command-line options, bogofilter will
+    almost certainly stop working.
+  * Switch from db4.1 to db4.2.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  1 Jan 2004 18:06:24 -0500
+
+bogofilter (0.15.13-1) unstable; urgency=low
+
+  * New upstream current release.  This fixes the
+    "cannot allocate memory" error for people still using separate
+    wordlist files.  closes: #224504, #224546.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 27 Dec 2003 15:11:14 -0500
+
+bogofilter (0.15.12-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 24 Dec 2003 20:56:03 -0500
+
+bogofilter (0.15.11-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 17 Dec 2003 10:28:29 -0500
+
+bogofilter (0.15.10-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  8 Dec 2003 21:45:53 -0500
+
+bogofilter (0.15.9-2) unstable; urgency=medium
+
+  * Include integrating-with-{postfix,qmail} docs.  closes: #223183.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  7 Dec 2003 10:12:41 -0500
+
+bogofilter (0.15.9-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * No longer suggest db4.1-util, and remove db4.1-util note from
+    README.Debian.  closes: #218582.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 24 Nov 2003 00:37:31 -0500
+
+bogofilter (0.15.8-1) unstable; urgency=medium
+
+  * New upstream current release.
+    (This removes some out-of-date information from the manpage,
+    thus closes: #217739.)
+
+ -- Clint Adams <schizo@debian.org>  Thu, 30 Oct 2003 09:20:54 -0500
+
+bogofilter (0.15.7-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Add note from Jerome R. Acks to README.Debian that db4.1-util
+    is necessary for running bogotune.  closes: #212791.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 14 Oct 2003 09:31:32 -0400
+
+bogofilter (0.15.6-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  3 Oct 2003 15:53:38 -0400
+
+bogofilter (0.15.4-2) unstable; urgency=medium
+
+  * Make bogolex.sh POSIX-compliant.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 24 Sep 2003 09:41:14 -0400
+
+bogofilter (0.15.4-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Bump to Standards-Version 3.6.1.
+  * Add libgsl0-dev to Build-Depends.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 19 Sep 2003 19:08:47 -0400
+
+bogofilter (0.15.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 11 Sep 2003 10:33:59 -0400
+
+bogofilter (0.15.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  4 Sep 2003 08:04:33 -0400
+
+bogofilter (0.15.0-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  1 Sep 2003 14:13:16 -0400
+
+bogofilter (0.14.5.4-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  1 Sep 2003 14:07:46 -0400
+
+bogofilter (0.14.5.2-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 26 Aug 2003 09:00:30 -0400
+
+bogofilter (0.14.5.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 19 Aug 2003 20:44:30 -0400
+
+bogofilter (0.14.4-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 10 Aug 2003 17:37:54 -0400
+
+bogofilter (0.14.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  4 Aug 2003 21:47:57 -0400
+
+bogofilter (0.14.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  2 Aug 2003 21:57:18 -0400
+
+bogofilter (0.14.1.1-3) unstable; urgency=medium
+
+  * Apply the real patch to stop segfaulting on some architectures.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  2 Aug 2003 16:24:30 -0400
+
+bogofilter (0.14.1.1-2) unstable; urgency=medium
+
+  * Apply patch to stop segfaulting on some architectures.
+  * Remove gdb build-dep again.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  2 Aug 2003 11:07:14 -0400
+
+bogofilter (0.14.1.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  1 Aug 2003 20:10:36 -0400
+
+bogofilter (0.14.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Build-dep on gdb for arm, hppa, m68k, mips, mipsel
+    to help track down possible misoptimization.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 31 Jul 2003 19:19:54 -0400
+
+bogofilter (0.14.0.1-2) unstable; urgency=medium
+
+  * Bump to Standards-Version 3.6.0.
+  * Suggest db4.1-util (for bogotune).
+  * Have bogotune call db4.1_verify instead of db_verify.
+    closes: #203017
+
+ -- Clint Adams <schizo@debian.org>  Mon, 28 Jul 2003 09:57:30 -0400
+
+bogofilter (0.14.0.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 24 Jul 2003 01:04:41 -0400
+
+bogofilter (0.14.0-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 22 Jul 2003 19:24:24 -0400
+
+bogofilter (0.13.7.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 17 Jul 2003 09:47:26 -0400
+
+bogofilter (0.13.7.2-2) unstable; urgency=medium
+
+  * Use newer config.{guess,sub}.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 14 Jul 2003 08:11:05 -0400
+
+bogofilter (0.13.7.2-1) unstable; urgency=medium
+
+  * New upstream stable release.
+  * Move tuning stuff to saner locations.  closes: #199921.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  6 Jul 2003 11:49:35 -0400
+
+bogofilter (0.13.7-2) unstable; urgency=medium
+
+  * Use newer config.{guess,sub}.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 23 Jun 2003 07:36:55 -0400
+
+bogofilter (0.13.7-1) unstable; urgency=low
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 20 Jun 2003 20:14:36 -0400
+
+bogofilter (0.13.6.2-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 12 Jun 2003 14:25:19 -0400
+
+bogofilter (0.13.6.1-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  5 Jun 2003 22:30:14 -0400
+
+bogofilter (0.13.6-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  4 Jun 2003 15:15:29 -0400
+
+bogofilter (0.13.5-1) unstable; urgency=medium
+
+  * New upstream current release.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  3 Jun 2003 10:59:27 -0400
+
+bogofilter (0.13.4-1) unstable; urgency=medium
+
+  * New upstream current release. This increases the default robs
+    value from 0.001 to 0.01.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 30 May 2003 09:49:45 -0400
+
+bogofilter (0.13.3-1) unstable; urgency=medium
+
+  * New upstream current release.  Note that as of 0.13.2, case
+    folding was disabled by default, and may lead to an increase
+    in false negatives when using case-folded wordlists.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 29 May 2003 12:20:38 -0400
+
+bogofilter (0.13.2-1) unstable; urgency=high
+
+  * New upstream current release, which fixes the
+    replace_ascii_characters/ignore_case interaction defect.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 24 May 2003 11:12:45 -0400
+
+bogofilter (0.13.0-1) unstable; urgency=low
+
+  * New upstream current release.
+  * Clean the correct substvars file in the clean target.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 21 May 2003 12:51:00 -0400
+
+bogofilter (0.12.3-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Remove misleading comments from bogofilter.cf.  closes: #187721.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 10 May 2003 12:30:37 -0400
+
+bogofilter (0.12.2-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Build-dep ONLY on libdb4.1-dev, for Adrian Bunk.  closes: #191061.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 30 Apr 2003 10:39:26 -0400
+
+bogofilter (0.12.1-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Wordhash patch from David Relson to fix hppa alignment issue.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Apr 2003 11:21:58 -0400
+
+bogofilter (0.11.2-1) unstable; urgency=low
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 23 Apr 2003 22:02:30 -0400
+
+bogofilter (0.11.1.9-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Install procmail and maildrop examples.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 11 Apr 2003 21:19:41 -0400
+
+bogofilter (0.11.1.6-3) unstable; urgency=medium
+
+  * Add some more checks to t.bogodir to make sure it's failing
+    due to nonexistent homedirs on certain buildds.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  6 Apr 2003 19:20:43 -0400
+
+bogofilter (0.11.1.6-2) unstable; urgency=medium
+
+  * Use more loquacious t.bogodir to try to get some insight on
+    the intermittent failures.
+  * Drop gdb build-dep on s390.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  6 Apr 2003 12:21:56 -0400
+
+bogofilter (0.11.1.6-1) unstable; urgency=medium
+
+  * New upstream current release.
+  * Go back to building with -O1 on s390 to deal with the gcc bug.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  5 Apr 2003 22:39:12 -0500
+
+bogofilter (0.11.1.5-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 29 Mar 2003 13:17:50 -0500
+
+bogofilter (0.11.1.4-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 26 Mar 2003 01:20:23 -0500
+
+bogofilter (0.11.1.3-6) unstable; urgency=low
+
+  * See if the segfaults recur with -O2.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 11 Mar 2003 19:36:49 -0500
+
+bogofilter (0.11.1.3-5) unstable; urgency=low
+
+  * Now build with -O0 on s390.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 11 Mar 2003 18:45:18 -0500
+
+bogofilter (0.11.1.3-4) unstable; urgency=low
+
+  * Really build with -O1 on s390 this time.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 11 Mar 2003 16:02:28 -0500
+
+bogofilter (0.11.1.3-3) unstable; urgency=low
+
+  * Build with -O1 on s390.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 11 Mar 2003 15:27:09 -0500
+
+bogofilter (0.11.1.3-2) unstable; urgency=medium
+
+  * Unlimit coredumpsize so that printcore works.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 10 Mar 2003 23:32:32 -0500
+
+bogofilter (0.11.1.3-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * Temporarily build-dep on gdb on s390 to get more information on the
+    mysterious segfaults under sbuild.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 10 Mar 2003 20:57:14 -0500
+
+bogofilter (0.11.1.2-2) unstable; urgency=low
+
+  * Remove no-longer-relevant Build-Depends.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  9 Mar 2003 22:17:56 -0500
+
+bogofilter (0.11.1.2-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  8 Mar 2003 12:04:04 -0500
+
+bogofilter (0.11.1.1-2) unstable; urgency=medium
+
+  * Apply patch to avoid divide by zero.  (should fix alpha build)
+
+ -- Clint Adams <schizo@debian.org>  Thu,  6 Mar 2003 09:49:24 -0500
+
+bogofilter (0.11.1.1-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  6 Mar 2003 00:01:49 -0500
+
+bogofilter (0.11.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  4 Mar 2003 22:24:23 -0500
+
+bogofilter (0.10.3-1) unstable; urgency=low
+
+  * New upstream patch release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 14 Feb 2003 11:39:05 -0500
+
+bogofilter (0.10.2-2) unstable; urgency=low
+
+  * Patch to fix html comment parsing bug.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  3 Feb 2003 18:17:15 -0500
+
+bogofilter (0.10.2-1) unstable; urgency=low
+
+  * New upstream stable release.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  3 Feb 2003 11:25:09 -0500
+
+bogofilter (0.10.1.5-1) unstable; urgency=low
+
+  * New upstream release, which fixes the sleep time randomization problem.
+    closes: #179297.
+  * Add README.Debian with mutt pipe_decode caveat.
+  * Switch to db4.1.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  1 Feb 2003 14:16:45 -0500
+
+bogofilter (0.10.1.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Put METHODS file in /usr/share/doc.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 31 Jan 2003 01:43:19 -0500
+
+bogofilter (0.10.1.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 30 Jan 2003 00:43:25 -0500
+
+bogofilter (0.10.1.2-4) unstable; urgency=low
+
+  * Fix broken tilde expansion.  closes: #178934.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 29 Jan 2003 21:34:49 -0500
+
+bogofilter (0.10.1.2-3) unstable; urgency=low
+
+  * More sizeof(long) and signedness issues.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 28 Jan 2003 20:49:15 -0500
+
+bogofilter (0.10.1.2-2) unstable; urgency=low
+
+  * Correct silly assumption of sizeof(long)==4.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 28 Jan 2003 17:42:54 -0500
+
+bogofilter (0.10.1.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 28 Jan 2003 12:12:46 -0500
+
+bogofilter (0.10.1.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 27 Jan 2003 10:58:20 -0500
+
+bogofilter (0.10.1-2) unstable; urgency=low
+
+  * Fix autoconf fumble.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 24 Jan 2003 01:19:35 -0500
+
+bogofilter (0.10.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 23 Jan 2003 07:59:50 -0500
+
+bogofilter (0.10.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Remove hppa gcc kludge.
+  * Add Build-Conflicts against autoconf so people will stop filing bugs
+    demanding that it be added to Build-Depends.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 19 Jan 2003 15:12:28 -0500
+
+bogofilter (0.9.1.2-5) unstable; urgency=low
+
+  * Fix "regognition" typo.  closes: #175671.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  7 Jan 2003 08:58:16 -0500
+
+bogofilter (0.9.1.2-4) unstable; urgency=low
+
+  * Change xmlto build-dep to require versions that call xmllint,
+    and don't call xmllint directly from build.  closes: #174819.
+    (Thanks to Graham Wilson).
+
+ -- Clint Adams <schizo@debian.org>  Tue, 31 Dec 2002 09:04:33 -0500
+
+bogofilter (0.9.1.2-3) unstable; urgency=low
+
+  * Install AUTHORS file and refer to it from copyright file.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 12 Dec 2002 09:18:06 -0500
+
+bogofilter (0.9.1.2-2) unstable; urgency=low
+
+  * Fix misleading bogofilter -h output.  closes: #172313.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  9 Dec 2002 11:21:40 -0500
+
+bogofilter (0.9.1.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Include README.Robinson in /usr/share/doc.  closes: #171967.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  6 Dec 2002 09:16:10 -0500
+
+bogofilter (0.9.1.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  5 Dec 2002 15:30:21 -0500
+
+bogofilter (0.9.1-2) unstable; urgency=low
+
+  * Patch from David Relson to remove an overzealous message count check.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  4 Dec 2002 10:02:47 -0500
+
+bogofilter (0.9.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fix documentation and config typoes. closes: #171010.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  3 Dec 2002 18:24:29 -0500
+
+bogofilter (0.9.0.1-3) unstable; urgency=low
+
+  * Check for size of double and long double in configure.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 23 Nov 2002 20:59:32 -0500
+
+bogofilter (0.9.0.1-2) unstable; urgency=low
+
+  * Remove errant strip command.  closes: #170452.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 23 Nov 2002 17:11:42 -0500
+
+bogofilter (0.9.0.1-1) unstable; urgency=low
+
+  * New upstream bugfix beta.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 23 Nov 2002 15:57:40 -0500
+
+bogofilter (0.9.0-1) unstable; urgency=low
+
+  * New upstream beta.  Default algorithm is now Robinson, not Graham.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 23 Nov 2002 02:42:17 -0500
+
+bogofilter (0.8.0.scvs20021121-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.  Includes Fisher's method for combining P.
+  * Build with gcc 3.2 on hppa to avoid bug in 3.0.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 21 Nov 2002 02:53:38 -0500
+
+bogofilter (0.8.0.rel-2) unstable; urgency=low
+
+  * Add /etc/bogofilter.cf conffile.
+  * Install bogofilter-faq.html.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  9 Nov 2002 22:47:52 -0500
+
+bogofilter (0.8.0.rel-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  9 Nov 2002 13:32:45 -0500
+
+bogofilter (0.8.0.rc3-1) unstable; urgency=low
+
+  * New upstream release candidate.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  8 Nov 2002 12:51:51 -0500
+
+bogofilter (0.8.0.rc2-2) unstable; urgency=medium
+
+  * Apply -u fix from rc3.
+
+ -- Clint Adams <schizo@debian.org>  Thu,  7 Nov 2002 11:21:14 -0500
+
+bogofilter (0.8.0.rc2-1) unstable; urgency=low
+
+  * New upstream release candidate.  0.8.0 release has been retracted.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  6 Nov 2002 21:34:56 -0500
+
+bogofilter (0.8.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Tue,  5 Nov 2002 19:58:02 -0500
+
+bogofilter (0.7.999+0.8.0.rc1-1) unstable; urgency=low
+
+  * New upstream release candidate.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  2 Nov 2002 14:41:31 -0500
+
+bogofilter (0.7.6-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 28 Oct 2002 19:08:04 -0500
+
+bogofilter (0.7.5+rc2.0.7.6-1) unstable; urgency=low
+
+  * New upstream release candidate for 0.7.6 (0.7.6rc2).
+
+ -- Clint Adams <schizo@debian.org>  Sun, 27 Oct 2002 14:11:34 -0500
+
+bogofilter (0.7.5+rc1.0.7.6-2) unstable; urgency=low
+
+  * Reapply signed char fix.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Oct 2002 19:39:39 -0400
+
+bogofilter (0.7.5+rc1.0.7.6-1) unstable; urgency=low
+
+  * New upstream release candidate for 0.7.6 (0.7.6rc1).
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Oct 2002 16:50:33 -0400
+
+bogofilter (0.7.5+1025cvs-5) unstable; urgency=low
+
+  * Try alternate patch for ia64.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Oct 2002 11:19:52 -0400
+
+bogofilter (0.7.5+1025cvs-4) unstable; urgency=low
+
+  * Change xmalloc to malloc in lexer.l to avoid segfault on ia64.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Oct 2002 03:06:08 -0400
+
+bogofilter (0.7.5+1025cvs-3) unstable; urgency=low
+
+  * Change char to int to avoid signedness problem on s390/arm/powerpc.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 26 Oct 2002 01:08:26 -0400
+
+bogofilter (0.7.5+1025cvs-2) unstable; urgency=low
+
+  * Resync with CVS.
+  * New fix for bus error.  closes: #166280.
+  * Build with 'make check'
+
+ -- Clint Adams <schizo@debian.org>  Fri, 25 Oct 2002 22:59:15 -0400
+
+bogofilter (0.7.5+1025cvs-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+  * Should fix memory alignment error.  closes: #166280.
+  * Includes bogoutil manpage.  closes: #165728.
+  * Also new are -g and -r options (for Graham and Robinson algorithms,
+    respectively).
+
+ -- Clint Adams <schizo@debian.org>  Fri, 25 Oct 2002 17:58:46 -0400
+
+bogofilter (0.7.5+1017cvs-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 17 Oct 2002 19:59:01 -0400
+
+bogofilter (0.7.4+1014cvs-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 14 Oct 2002 16:12:20 -0400
+
+bogofilter (0.7.4+1004cvs-1) unstable; urgency=low
+
+  * New upstream CVS snapshot, with fix for wordhash segfaults on hppa.
+    closes: bug#163049.
+  * Correct description of -v option in manpage.  closes: bug#163157.
+
+ -- Clint Adams <schizo@debian.org>  Fri,  4 Oct 2002 04:17:05 -0400
+
+bogofilter (0.7.4+1002cvs-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.  This includes multiple wordlist support.
+
+ -- Clint Adams <schizo@debian.org>  Wed,  2 Oct 2002 17:45:26 -0400
+
+bogofilter (0.7.4+0929cvs-1) unstable; urgency=low
+
+  * New upstream CVS snapshot.  This includes some fun changes.
+    For example, Judy is no longer used, -h and -H have been changed
+    back to -n and -N (whee), and the db filenames have been
+    changed again to spamlist and goodlist.
+  * Remove manpage reference to now-nonexistent -l option.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 29 Sep 2002 12:17:21 -0400
+
+bogofilter (0.7.4-6) unstable; urgency=low
+
+  * Get rid of 'debug'-priority syslog messages about 'trying' and
+    'released' flock locks.  closes: #162739.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 29 Sep 2002 11:42:14 -0400
+
+bogofilter (0.7.4-5) unstable; urgency=low
+
+  * No longer Build-Depend on debhelper.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 23 Sep 2002 00:18:25 -0400
+
+bogofilter (0.7.4-4) unstable; urgency=low
+
+  * Drop 'debug', support 'noopt' in DEB_BUILD_OPTIONS.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 22 Sep 2002 18:20:06 -0400
+
+bogofilter (0.7.4-3) unstable; urgency=low
+
+  * Use more liberal tokenization in the lexer, so that all manner
+    of high-bit characters will be treated as parts of words.
+    Hopefully this doesn't break much.  closes: #161019.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 22 Sep 2002 17:38:20 -0400
+
+bogofilter (0.7.4-2) unstable; urgency=medium
+
+  * Refix manpage typos.
+
+ -- Clint Adams <schizo@debian.org>  Sat, 21 Sep 2002 03:25:55 -0400
+
+bogofilter (0.7.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 20 Sep 2002 22:14:36 -0400
+
+bogofilter (0.7-6) unstable; urgency=medium
+
+  * Don't segfault when HOME is unset.  closes: bug#161084.
+
+ -- Clint Adams <schizo@debian.org>  Mon, 16 Sep 2002 19:11:04 -0400
+
+bogofilter (0.7-5) unstable; urgency=medium
+
+  * Check for reverse wraparound (but not forward wraparound).
+  closes: bug#160979.
+
+ -- Clint Adams <schizo@debian.org>  Sun, 15 Sep 2002 15:28:22 -0400
+
+bogofilter (0.7-4) unstable; urgency=medium
+
+  * Fix segfault when using bogofilter -d.  closes: bug#160413.
+    Beware; -d is still a bit temperamental.
+
+ -- Clint Adams <schizo@debian.org>  Wed, 11 Sep 2002 12:16:14 -0400
+
+bogofilter (0.7-3) unstable; urgency=low
+
+  * Really fix manpage typos this time.  closes: #160237.
+
+ -- Clint Adams <schizo@debian.org>  Tue, 10 Sep 2002 15:58:47 -0400
+
+bogofilter (0.7-2) unstable; urgency=low
+
+  * Fix several manpage typos.
+
+ -- Clint Adams <schizo@debian.org>  Mon,  9 Sep 2002 11:58:28 -0400
+
+bogofilter (0.7-1) unstable; urgency=low
+
+  * New upstream release.  This gets rid of the autodaemon,
+    thus it closes: bug#159937.
+  * Include TODO and the changelog, now that they're included in
+    the tarball.
+  * Update to Standards-Version 3.5.7.
+  * New build-dep on libdb4.0-dev.
+
+ -- Clint Adams <schizo@debian.org>  Sat,  7 Sep 2002 19:04:15 -0400
+
+bogofilter (0.6-2) unstable; urgency=low
+
+  * Logic inversion patch from Frank Copeland.
+
+ -- Clint Adams <schizo@debian.org>  Sun,  1 Sep 2002 13:48:25 -0400
+
+bogofilter (0.6-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Fri, 30 Aug 2002 13:25:50 -0400
+
+bogofilter (0.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 29 Aug 2002 19:27:16 -0400
+
+bogofilter (0.4-1) unstable; urgency=low
+
+  * Initial Release.  closes: #157878.
+
+ -- Clint Adams <schizo@debian.org>  Thu, 29 Aug 2002 20:56:36 +0000

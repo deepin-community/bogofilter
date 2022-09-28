@@ -1,0 +1,8 @@
+usr/share/man/man1/bf_compact.1.gz usr/share/man/man1/bf_compact-sqlite.1.gz
+usr/share/man/man1/bf_copy.1.gz usr/share/man/man1/bf_copy-sqlite.1.gz
+usr/share/man/man1/bf_tar.1.gz usr/share/man/man1/bf_tar-sqlite.1.gz
+usr/share/man/man1/bogofilter.1.gz usr/share/man/man1/bogofilter-sqlite.1.gz
+usr/share/man/man1/bogolexer.1.gz usr/share/man/man1/bogolexer-sqlite.1.gz
+usr/share/man/man1/bogotune.1.gz usr/share/man/man1/bogotune-sqlite.1.gz
+usr/share/man/man1/bogoupgrade.1.gz usr/share/man/man1/bogoupgrade-sqlite.1.gz
+usr/share/man/man1/bogoutil.1.gz usr/share/man/man1/bogoutil-sqlite.1.gz

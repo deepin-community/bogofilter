@@ -1,0 +1,85 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+export CONFIG_SHELL=/bin/bash
+
+derives_from_ubuntu := $(shell (dpkg-vendor --derives-from ubuntu && echo yes) || echo no)
+ifeq ($(derives_from_ubuntu),yes)
+DO_TOKYOCABINET = no
+export DH_OPTIONS := -Nbogofilter-tokyocabinet
+else
+DO_TOKYOCABINET = yes
+endif
+
+%:
+	dh $@ --without autoreconf
+
+override_dh_auto_configure:
+	mkdir -p $(CURDIR)/obj-doc
+	cd $(CURDIR)/obj-doc && ../configure
+	mkdir $(CURDIR)/obj-db $(CURDIR)/obj-sqlite
+	cd $(CURDIR)/obj-db && ../configure --with-database=db \
+		--prefix=/usr --mandir=\$${prefix}/share/man --sysconfdir=/etc \
+		AWK=awk $(shell dpkg-buildflags --export=configure)
+	cd $(CURDIR)/obj-sqlite && ../configure --with-database=sqlite \
+		--program-suffix=-sqlite --prefix=/usr --mandir=\$${prefix}/share/man \
+		--sysconfdir=/etc AWK=awk $(shell dpkg-buildflags --export=configure) && \
+		sed -i 's/^INTEGRITY_TESTS.*/INTEGRITY_TESTS=t.lock1/' src/tests/Makefile
+	if [ $(DO_TOKYOCABINET) = yes ]; then \
+		mkdir $(CURDIR)/obj-tokyocabinet; \
+		cd $(CURDIR)/obj-tokyocabinet && ../configure \
+			--with-database=tokyocabinet --program-suffix=-tokyocabinet \
+			--prefix=/usr --mandir=\$${prefix}/share/man --sysconfdir=/etc AWK=awk \
+			$(shell dpkg-buildflags --export=configure); \
+	fi
+
+override_dh_auto_build:
+	cd $(CURDIR)/obj-doc/doc && $(MAKE)
+	cd $(CURDIR)/obj-db && $(MAKE)
+	cd $(CURDIR)/obj-sqlite && $(MAKE)
+	if [ $(DO_TOKYOCABINET) = yes ]; then \
+		cd $(CURDIR)/obj-tokyocabinet && $(MAKE); \
+	fi
+
+override_dh_install:
+	test -e obj-bdb || ln -s obj-db obj-bdb
+	if [ $(DO_TOKYOCABINET) = yes ]; then \
+                dh_install; \
+	else dh_install -Xtokyocabinet; \
+        fi
+
+	dh_install
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=bogofilter-common
+	if [ -e debian/bogofilter-common/usr/share/doc/bogofilter-common/bogofilter-faq-bg.xhtml ]; then \
+		mv debian/bogofilter-common/usr/share/doc/bogofilter-common/bogofilter-faq-bg.xhtml \
+		   debian/bogofilter-common/usr/share/doc/bogofilter-common/bogofilter-faq-bg.html; \
+	fi
+
+override_dh_installchangelogs:
+	dh_installchangelogs NEWS -pbogofilter-common
+
+override_dh_compress:
+	dh_compress -X.pl
+
+override_dh_auto_clean:
+	rm -fr obj-bdb obj-db obj-sqlite obj-doc
+	if [ $(DO_TOKYOCABINET) = yes ];then \
+		rm -rf obj-tokyocabinet; \
+	fi
+
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+ifeq (,$(filter $(DEB_HOST_ARCH_OS), hurd))
+override_dh_auto_test:
+	cd $(CURDIR)/obj-db && $(MAKE) check
+	cd $(CURDIR)/obj-sqlite && $(MAKE) check
+	if [ $(DO_TOKYOCABINET) = yes ]; then \
+		cd $(CURDIR)/obj-tokyocabinet && $(MAKE) check; \
+	fi
+endif
+endif
+

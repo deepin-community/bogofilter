@@ -1,0 +1,15 @@
+AUTHORS
+GETTING.STARTED
+README
+RELEASE.NOTES
+TODO
+doc/README.db
+doc/README.sqlite
+doc/bogofilter-faq-bg.xhtml
+doc/bogofilter-faq-fr.html
+doc/bogofilter-faq-it.html
+doc/bogofilter-faq.html
+doc/bogofilter-tuning.HOWTO.html
+doc/bogotune-faq.html
+doc/integrating-with-postfix
+doc/integrating-with-qmail

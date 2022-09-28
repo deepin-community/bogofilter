@@ -1,0 +1,9 @@
+#!/usr/bin/dh-exec
+obj-tokyocabinet/src/bf_compact => /usr/bin/bf_compact-tokyocabinet
+obj-tokyocabinet/src/bf_copy => /usr/bin/bf_copy-tokyocabinet
+obj-tokyocabinet/src/bf_tar => /usr/bin/bf_tar-tokyocabinet
+obj-tokyocabinet/src/bogofilter => /usr/bin/bogofilter-tokyocabinet
+obj-tokyocabinet/src/bogolexer => /usr/bin/bogolexer-tokyocabinet
+obj-tokyocabinet/src/bogotune => /usr/bin/bogotune-tokyocabinet
+obj-tokyocabinet/src/bogoupgrade => /usr/bin/bogoupgrade-tokyocabinet
+obj-tokyocabinet/src/bogoutil => /usr/bin/bogoutil-tokyocabinet

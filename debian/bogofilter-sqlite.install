@@ -1,0 +1,9 @@
+#!/usr/bin/dh-exec 
+obj-sqlite/src/bf_compact => /usr/bin/bf_compact-sqlite
+obj-sqlite/src/bf_copy => /usr/bin/bf_copy-sqlite
+obj-sqlite/src/bf_tar => /usr/bin/bf_tar-sqlite
+obj-sqlite/src/bogofilter => /usr/bin/bogofilter-sqlite
+obj-sqlite/src/bogolexer => /usr/bin/bogolexer-sqlite
+obj-sqlite/src/bogotune => /usr/bin/bogotune-sqlite
+obj-sqlite/src/bogoupgrade => /usr/bin/bogoupgrade-sqlite
+obj-sqlite/src/bogoutil => /usr/bin/bogoutil-sqlite

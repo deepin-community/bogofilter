@@ -1,0 +1,9 @@
+#!/usr/bin/dh-exec
+obj-bdb/src/bf_compact => /usr/bin/bf_compact-bdb
+obj-bdb/src/bf_copy => /usr/bin/bf_copy-bdb
+obj-bdb/src/bf_tar => /usr/bin/bf_tar-bdb
+obj-bdb/src/bogofilter => /usr/bin/bogofilter-bdb
+obj-bdb/src/bogolexer => /usr/bin/bogolexer-bdb
+obj-bdb/src/bogotune => /usr/bin/bogotune-bdb
+obj-bdb/src/bogoupgrade => /usr/bin/bogoupgrade-bdb
+obj-bdb/src/bogoutil => /usr/bin/bogoutil-bdb

@@ -1,0 +1,16 @@
+Description: Option '-a' added to grep.
+Author: Herbert Parentes Fortes Neto <hpfn@ig.com.br>
+Last-Update: 2016-04-16
+Index: bogofilter-1.2.4+dfsg1/src/tests/t.bulkmode
+===================================================================
+--- bogofilter-1.2.4+dfsg1.orig/src/tests/t.bulkmode
++++ bogofilter-1.2.4+dfsg1/src/tests/t.bulkmode
+@@ -89,7 +89,7 @@ sort -u < "$TMPDIR"/$NAME.tmp > "$TMPDIR
+ NAME="bulk-double-2"
+ for f in $pattern ; do
+     t="$TMPDIR/$(basename "$f")"
+-    $GREP -v "^From " <"$f" > "$t"
++    $GREP -av "^From " <"$f" > "$t"
+     map_rc "$BOGOFILTER -c \"$CFG\" -B \"$t\" \"$t\"" | \
+ 	sed 's@.*/@./inputs/@' >> "$TMPDIR"/$NAME.tmp
+ done

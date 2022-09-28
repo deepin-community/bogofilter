@@ -1,0 +1,25 @@
+# Description: make bf_tar use tar instead of pax to drop "Suggests: pax"
+# Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=341973
+# Forwarded: not-needed
+# Author: Serafeim Zanikolas <serzan@hellug.gr>
+# Last-Update: 2009-08-01
+Index: bogofilter/src/bf_tar
+===================================================================
+--- bogofilter.orig/src/bf_tar.in	2009-07-13 22:30:30.000000000 +0200
++++ bogofilter/src/bf_tar.in	2009-07-13 22:30:49.000000000 +0200
+@@ -61,12 +61,13 @@
+ # that state will not be recoverable!
+ #
+ # pax options: -w: write archive, -v: verbosely, -x ustar: pick tar format.
+-(
++files=$(
+   c="${BOGOHOME}/DB_CONFIG"
+   if [ -f "$c" ] ; then echo "$c" ; fi
+   $BOGOFILTER -QQ -d "$BOGOHOME" | grep '^wordlist ' | cut -f3 -d,
+   $BOGOUTIL --db-list-logfiles="$BOGOHOME" all
+-) | pax -w -v -x ustar
++)
++tar --create --to-stdout --verbose --format=ustar $files
+ 
+ # remove if requested
+ if [ $REMOVEAFT -eq 1 ] ; then nukelogs ; fi

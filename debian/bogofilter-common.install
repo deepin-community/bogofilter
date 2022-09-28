@@ -1,0 +1,3 @@
+#!/usr/bin/dh-exec
+bogofilter.cf.example => /etc/bogofilter.cf
+
